@@ -4,8 +4,7 @@ const fileUpload = require('express-fileupload')
 const app = express()
 const port = 8000
 
-/* create the "file listing" page */
-app.use('/list', directory(__dirname + '/content'));
+/* everything will be routed to /var/www/html */
 
 /* serve the uploader */
 app.use('/shit', express.static('static'))
@@ -13,19 +12,19 @@ app.use('/shit', express.static('static'))
 /* create the upload endpoint */
 app.use(fileUpload());
 
-app.post('/upload', function(req, res) {
+app.post('/api/v1/upload', function(req, res) {
   let uploadThisFuckingFile;
   let uploadPath;
 
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   uploadThisFuckingFile = req.files.uploadThisFuckingFile;
-  uploadPath = __dirname + '/content/' + uploadThisFuckingFile.name;
+  uploadPath = '/var/www/html/' + uploadThisFuckingFile.name;
 
   // Use the mv() method to place the file somewhere on your server
   uploadThisFuckingFile.mv(uploadPath, function(err) {
     if (err)
       return res.status(500).send(err);
-    res.status(200).end()
+    res.status(200).send("File was uploaded successfully, it should now appear on the dump.").end()
   });
 });
 
