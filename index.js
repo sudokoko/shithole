@@ -6,9 +6,6 @@ const port = 8000
 
 /* everything will be routed to /var/www/html */
 
-/* serve the uploader */
-app.use('/shit', express.static('static'))
-
 /* create the upload endpoint */
 app.use(fileUpload());
 
@@ -27,6 +24,9 @@ app.post('/api/v1/upload', function(req, res) {
     res.status(200).send("File was uploaded successfully, it should now appear on the dump.").end()
   });
 });
+
+/* serve the uploader */
+app.use('*', express.static('static'))
 
 app.listen(port, () => {
     if(port === 8000)
