@@ -1,0 +1,24 @@
+{
+  "name": "shithole",
+  "version": "1.0.0",
+  "description": "a really unsecure backend for displaying a public dump of files",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.18.2",
+    "serve-index": "^1.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sudokoko/shithole.git"
+  },
+  "author": "koko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sudokoko/shithole/issues"
+  },
+  "homepage": "https://github.com/sudokoko/shithole#readme"
+}
