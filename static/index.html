@@ -1,6 +1,20 @@
 <html>
+  <head>
+    <style>
+      .center-screen {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 100vh;
+        padding: 10px;
+        border: 1px solid red;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
   <body>
-    <form ref='uploadForm' 
+    <form class='center-screen' ref='uploadForm' 
       id='uploadForm' 
       action='/upload' 
       method='POST' 
