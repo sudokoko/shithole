@@ -1,14 +1,14 @@
 const express = require('express')
 const directory = require('serve-index');
 const app = express()
-const port = 80 // don't assume https
+const port = 80 // http
 
-app.use('/', serveIndex(__dirname + '/content'));
+app.use('/', directory(__dirname + '/content'));
 
 app.listen(port, () => {
-    if(port === "80")
+    if(port === 80)
     {
-        console.warn(`Use HTTPS you dingus!`)
+        console.warn(`If you plan on using this legitimately, please change the port variable to 443 :)`)
     }
   console.log(`App listening on port ${port}`)
 })
