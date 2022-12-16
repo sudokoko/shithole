@@ -5,7 +5,7 @@ const app = express()
 const port = 8000
 
 /* create the "file listing" page */
-app.use('/', directory(__dirname + '/content'));
+app.use('/list', directory(__dirname + '/content'));
 
 /* serve the uploader */
 app.use('/shit', express.static('static'))
