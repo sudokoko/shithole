@@ -2,15 +2,14 @@ const express = require('express')
 const directory = require('serve-index');
 const fileUpload = require('express-fileupload')
 const app = express()
+const rateLimit = require('express-rate-limit')
 const port = 8000
 
 /* everything will be routed to /var/www/html */
 
 
 /* rate limit all routes */
-
-var RateLimit = require('express-rate-limit');
-var limiter = new RateLimit({
+var limiter = new rateLimit({
   windowMs: 1*60*1000, // 1 minute
   max: 5
 });
