@@ -6,6 +6,19 @@ const port = 8000
 
 /* everything will be routed to /var/www/html */
 
+
+/* rate limit all routes */
+
+var RateLimit = require('express-rate-limit');
+var limiter = new RateLimit({
+  windowMs: 1*60*1000, // 1 minute
+  max: 5
+});
+
+// apply rate limiter to all requests
+app.use(limiter);
+
+
 /* create the upload endpoint */
 app.use(fileUpload());
 
@@ -25,8 +38,10 @@ app.post('/api/v1/upload', function(req, res) {
   });
 });
 
+
 /* serve the uploader */
 app.use('*', express.static('static'))
+
 
 app.listen(port, () => {
     if(port === 8000)
