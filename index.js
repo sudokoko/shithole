@@ -15,11 +15,9 @@ app.post('/api/v1/upload', function(req, res) {
   let uploadThisFuckingFile;
   let uploadPath;
 
-  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   uploadThisFuckingFile = req.files.uploadThisFuckingFile;
   uploadPath = '/var/www/html/' + uploadThisFuckingFile.name;
 
-  // Use the mv() method to place the file somewhere on your server
   uploadThisFuckingFile.mv(uploadPath, function(err) {
     if (err)
       return res.status(500).send(err);
