@@ -22,12 +22,9 @@ app.post('/api/v1/upload', function(req, res) {
 });
 
 app.get('/api/v1/delete', function(req, res) {
-  let auth = req.params.token;
-  let file = req.params.path; 
-
-  if(auth = process.env.MODERATION_TOKEN)
+  if(req.query.token = process.env.MODERATION_TOKEN)
   {
-    fs.unlinkSync("/var/www/html/" + file);
+    fs.unlinkSync("/var/www/html/" + req.query.path);
     res.status(200).send("File has been deleted.").end();
   } else {
     res.status(403).send("You are not authorized to perform this action").end();
