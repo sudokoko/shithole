@@ -21,7 +21,7 @@ app.post('/api/v1/upload', function(req, res) {
   });
 });
 
-app.delete('/api/v1/delete', function(req, res) {
+app.get('/api/v1/delete', function(req, res) {
   let auth = req.params.token;
   let file = req.params.path; 
 
