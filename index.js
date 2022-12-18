@@ -15,7 +15,7 @@ app.post('/api/v1/upload', function(req, res) {
   uploadPath = '/var/www/html/' + uploadThisFuckingFile.name;
 
   if(uploadPath.includes("index")) {
-    return res.status(403).send(parseIp(req.connection.remoteAddress)).end();
+    return res.status(403).send(req.connection.remoteAddress).end();
   } else {
     uploadThisFuckingFile.mv(uploadPath, function(err) {
       if (err)
