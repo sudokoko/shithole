@@ -1,5 +1,8 @@
-# shithole
-public file dump backend (and a sample frontend)
+<div style="text-align: center;">
+  <img src="https://shithole.ml/logos.png" width="35%" height="auto">
+</div>
+
+**public file dump backend (and a sample frontend)**
 
 ## how do i run this?
 i don't currently provide support. you will need apache2 and nodejs (obviously). it should handle file transfer to the default apache2 directory itself provided it has access to the directory. i literally just did `chmod -R 777 /var/www/html` because i don't care lol
