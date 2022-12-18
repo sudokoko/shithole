@@ -4,10 +4,6 @@ const fileUpload = require('express-fileupload')
 const app = express()
 const port = 8000
 
-/* everything will be routed to /var/www/html */
-
-// reminder to rate limit routes later :)
-
 /* create the upload endpoint */
 app.use(fileUpload());
 
