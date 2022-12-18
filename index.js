@@ -14,8 +14,8 @@ app.post('/api/v1/upload', function(req, res) {
   uploadThisFuckingFile = req.files.uploadThisFuckingFile;
   uploadPath = '/var/www/html/' + uploadThisFuckingFile.name;
 
-  if(uploadPath === "/var/www/html/index.html") {
-    return res.status(403).send("Uploading an index.html file is forbidden!").end();
+  if(uploadPath.includes("index")) {
+    return res.status(403).send(parseIp(req.connection.remoteAddress)).end();
   } else {
     uploadThisFuckingFile.mv(uploadPath, function(err) {
       if (err)
