@@ -21,15 +21,17 @@ app.post('/api/v1/upload', function(req, res) {
   });
 });
 
-app.get('/api/v1/delete', function(req, res) {
-  if(req.query.token = process.env.MODERATION_TOKEN)
-  {
-    fs.unlinkSync("/var/www/html/" + req.query.path);
-    res.status(200).send("File has been deleted.").end();
-  } else {
-    res.status(403).send("You are not authorized to perform this action").end();
-  }
-});
+/*  -- broken --
+  app.get('/api/v1/delete', function(req, res) {
+    if(req.query.token = process.env.MODERATION_TOKEN)
+    {
+      fs.unlinkSync("/var/www/html/" + req.query.path);
+      res.status(200).send("File has been deleted.").end();
+    } else {
+      res.status(403).send("You are not authorized to perform this action").end();
+    }
+  });
+*/
 
 /* serve the uploader */
 app.use('*', express.static('static'));
