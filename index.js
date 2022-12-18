@@ -15,7 +15,8 @@ app.post('/api/v1/upload', function(req, res) {
   uploadPath = '/var/www/html/' + uploadThisFuckingFile.name;
 
   if(uploadPath.includes("index")) {
-    return res.status(403).send(req.connection.remoteAddress).end();
+    var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
+    return res.status(403).send("您好 "+ ip + "，您似乎正在尝试上传 index.html 文件。 不要那样做你这只傻鹅！").end();
   } else {
     uploadThisFuckingFile.mv(uploadPath, function(err) {
       if (err)
