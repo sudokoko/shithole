@@ -4,10 +4,6 @@ const fileUpload = require('express-fileupload')
 const app = express()
 const port = 8000
 
-/* everything will be routed to /var/www/html */
-
-// reminder to rate limit routes later :)
-
 /* create the upload endpoint */
 app.use(fileUpload());
 
@@ -31,9 +27,9 @@ app.use('*', express.static('static'))
 
 
 app.listen(port, () => {
-    if(port === 8000)
+    if(port != 80 || port != 443)
     {
-        console.warn(`If you plan on using this legitimately, please change the port variable to 443 :)`)
+        console.warn(`You will probably need to do some jank shit with a tool like Portzilla to get the front-end accessible!`)
     }
   console.log(`App listening on port ${port}`)
 })
