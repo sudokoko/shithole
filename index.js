@@ -10,17 +10,17 @@ app.use(fileUpload());
 app.post('/api/v1/upload', function(req, res) {
   let uploadThisFuckingFile;
   let uploadPath;
+  let literalFilePath;
 
   uploadThisFuckingFile = req.files.uploadThisFuckingFile;
   uploadPath = '/var/www/html/' + uploadThisFuckingFile.name;
-  
-  if(uploadPath.includes("/") || uploadPath.includes("\\") || uploadPath.includes("..") || uploadPath.includes("%2F") || uploadPath.includes("%5C")) {
-    res.status(403).send("no! th-thats dirty... you can't do that..!").end()
-  }
+  literalFilePath = uploadThisFuckingFile.name;
 
   if(uploadPath.includes("index")) {
     var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
     return res.status(403).send("您好 "+ ip + "，您似乎正在尝试上传 index.html 文件。 不要那样做你这只傻鹅！").end();
+  } elif(literalFilePath.includes("/") || literalFilePath.includes("\\") || literalFilePath.includes("..") || literalFilePath.includes("%2F") || literalFilePath.includes("%5C")) {
+    res.status(403).send("no! th-thats dirty... you can't do that..!").end()
   } else {
     uploadThisFuckingFile.mv(uploadPath, function(err) {
       if (err)
