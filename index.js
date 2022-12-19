@@ -14,7 +14,7 @@ app.post('/api/v1/upload', function(req, res) {
   uploadThisFuckingFile = req.files.uploadThisFuckingFile;
   uploadPath = '/var/www/html/' + uploadThisFuckingFile.name;
   
-  if(uploadPath.includes("/") || uploadPath.includes("\\") || uploadPath.includes("..")) {
+  if(uploadPath.includes("/") || uploadPath.includes("\\") || uploadPath.includes("..") || uploadPath.includes("%2F") || uploadPath.includes("%5C")) {
     res.status(403).send("no! th-thats dirty... you can't do that..!").end()
   }
 
