@@ -34,16 +34,6 @@ app.post('/api/v1/upload', function(req, res) {
   }
 });
 
-/* bans */
-app.get('*', function(req, res) {
-  const banList = fs.readFileSync("/var/www/html/configuration/bans.txt");
-  var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
-
-  if(banList.includes(ip)) {
-    res.status(403).send("You are permanently banned from accessing this shithole instance for uploading illegal, malicious, or copyrighted content.").end();
-  }
-});
-
 /* serve the uploader */
 app.use('*', express.static('static'));
 
