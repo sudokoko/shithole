@@ -1,6 +1,5 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
-const sanitize = require('sanitize-filename');
 const fs = require('fs');
 const app = express();
 const port = 8000;
@@ -11,17 +10,19 @@ app.use(fileUpload());
 app.post('/api/v1/upload', function(req, res) {
   let uploadThisFuckingFile;
   let uploadPath;
-  let sanitizedUploadPath;
 
   uploadThisFuckingFile = req.files.uploadThisFuckingFile;
   uploadPath = '/var/www/html/' + uploadThisFuckingFile.name;
-  sanitizedUploadPath = sanitize(uploadPath);
+  
+  if(uploadPath.includes("/") || uploadPath.includes("\\") || uploadPath.includes("..")) {
+    res.status(403).send("no! th-thats dirty... you can't do that..!").end()
+  }
 
   if(uploadPath.includes("index")) {
     var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
     return res.status(403).send("您好 "+ ip + "，您似乎正在尝试上传 index.html 文件。 不要那样做你这只傻鹅！").end();
   } else {
-    uploadThisFuckingFile.mv(sanitizedUploadPath, function(err) {
+    uploadThisFuckingFile.mv(uploadPath, function(err) {
       if (err)
         return res.status(500).send(err);
       res.status(200).send("File was uploaded successfully, it should now appear on the dump.").end();
