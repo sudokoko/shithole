@@ -19,7 +19,7 @@ app.post('/api/v1/upload', function(req, res) {
   if(uploadPath.includes("index")) {
     var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
     return res.status(403).send("您好 "+ ip + "，您似乎正在尝试上传 index.html 文件。 不要那样做你这只傻鹅！").end();
-  } elif(literalFilePath.includes("/") || literalFilePath.includes("\\") || literalFilePath.includes("..") || literalFilePath.includes("%2F") || literalFilePath.includes("%5C")) {
+  } else if(literalFilePath.includes("/") || literalFilePath.includes("\\") || literalFilePath.includes("..") || literalFilePath.includes("%2F") || literalFilePath.includes("%5C")) {
     res.status(403).send("no! th-thats dirty... you can't do that..!").end()
   } else {
     uploadThisFuckingFile.mv(uploadPath, function(err) {
