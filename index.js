@@ -29,7 +29,7 @@ app.post('/api/v1/upload', function(req, res) {
     uploadThisFuckingFile.mv(uploadPath, function(err) {
       if (err)
         return res.status(500).send(err);
-        fs.appendFileSync('/var/www/html/configuration/upload.log', '[' + ip + ' -> POST /api/v1/upload] ' + literalFilePath); // logging. because people are dumb.
+        fs.appendFileSync('/var/www/html/configuration/upload.log', '[' + ip + ' -> POST /api/v1/upload] ' + literalFilePath + '\n'); // logging. because people are dumb.
       res.status(200).send("File was uploaded successfully, it should now appear on the dump.").end();
     });
   }
