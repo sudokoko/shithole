@@ -11,10 +11,12 @@ app.post('/api/v1/upload', function (req, res) {
   let uploadThisFuckingFile;
   let uploadPath;
   let literalFilePath;
+  let isNsfw;
 
   uploadThisFuckingFile = req.files.uploadThisFuckingFile;
   uploadPath = '/var/www/html/' + uploadThisFuckingFile.name;
   literalFilePath = uploadThisFuckingFile.name;
+  isNsfw = req.query.nsfw;
 
   const banList = fs.readFileSync("/var/www/html/configuration/bans.txt");
   var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
@@ -29,7 +31,7 @@ app.post('/api/v1/upload', function (req, res) {
     uploadThisFuckingFile.mv(uploadPath, function (err) {
       if (err)
         return res.status(500).send(err);
-      if (isNsfw) {
+      if (isNsfw === "true") {
         fs.appendFileSync('/var/www/html/.htaccess', 'AddDescription "This file contains content flagged as NSFW." ' + literalFilePath + '\n')
       }
       fs.appendFileSync('/var/www/html/configuration/upload.log', '[' + ip + ' -> POST /api/v1/upload] ' + literalFilePath + '\n'); // logging. because people are dumb.
