@@ -27,9 +27,9 @@ app.post('/api/v1/upload', function (req, res) {
     res.status(403).send("no! th-thats dirty... you can't do that..!").end()
   } else {
     uploadThisFuckingFile.mv(uploadPath, function (err) {
-      if(err)
+      if (err)
         return res.status(500).send(err);
-      if(isNsfw) {
+      if (isNsfw) {
         fs.appendFileSync('/var/www/html/.htaccess', 'AddDescription "This file contains content flagged as NSFW." ' + literalFilePath + '\n')
       }
       fs.appendFileSync('/var/www/html/configuration/upload.log', '[' + ip + ' -> POST /api/v1/upload] ' + literalFilePath + '\n'); // logging. because people are dumb.
