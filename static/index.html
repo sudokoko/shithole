@@ -1,27 +1,27 @@
 <html>
-  <head>
-    <style>
-      .center-screen {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <form ref='uploadForm' 
-      id='uploadForm' 
-      action='/api/v1/upload' 
-      method='POST' 
-      encType="multipart/form-data">
-      <div class='center-screen'>
-        <input type="file" name="uploadThisFuckingFile" />
-        <input type='submit' value='Upload File' />
-        <input type="checkbox" id="isNsfw" name="nsfw" value="true">
-          <label for="isNsfw"> This content contains NSFW.</label><br>
-      </div>
-    </form>     
-  </body>
+
+<head>
+  <style>
+    .center-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <form ref='uploadForm' id='uploadForm' action='/api/v1/upload' method='POST'
+    encType="multipart/form-data">
+    <div class='center-screen'>
+      <input type="file" name="uploadThisFuckingFile" />
+      <input type="checkbox" id="isNsfw" name="nsfw" value="true">
+      <label for="isNsfw" style="font-family: sans-serif;">NSFW&nbsp;&nbsp;&nbsp;</label>
+      <input type='submit' value='Upload File' />
+    </div>
+  </form>
+</body>
+
 </html>
