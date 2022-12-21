@@ -13,11 +13,11 @@
 </head>
 
 <body>
-  <form style="display: inline;" ref='uploadForm' id='uploadForm' action='/api/v1/upload' method='POST'
+  <form ref='uploadForm' id='uploadForm' action='/api/v1/upload' method='POST'
     encType="multipart/form-data">
     <div class='center-screen'>
-      <input type="file" name="uploadThisFuckingFile" />
-      <input type='submit' value='Upload File' /><br><br>
+      <input type="file" name="uploadThisFuckingFile" style="display: inline;" />
+      <input type='submit' value='Upload File' style="display: inline;" />
       <input type="checkbox" id="isNsfw" name="nsfw" value="true">
       <label for="isNsfw"> This content contains NSFW.</label>
     </div>
