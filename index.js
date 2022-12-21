@@ -7,7 +7,7 @@ const port = 8000;
 /* create the upload endpoint */
 app.use(fileUpload());
 
-app.post('/api/v1/upload/:nsfw', function (req, res) {
+app.post('/api/v1/upload', function (req, res) {
   let uploadThisFuckingFile;
   let uploadPath;
   let literalFilePath;
