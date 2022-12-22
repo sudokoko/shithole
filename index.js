@@ -2,7 +2,7 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
 const app = express();
-const port = 8000;
+const port = 8000; // this is temporary!
 
 /* create the upload endpoint */
 app.use(fileUpload());
