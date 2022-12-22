@@ -24,7 +24,7 @@ app.post('/api/v1/upload', function (req, res) {
   } else if (uploadPath.includes("index")) {
     return res.status(403).send("您好 " + ip + "，您似乎正在尝试上传 index.html 文件。 不要那样做你这只傻鹅！").end();
   } else if (literalFilePath.includes("/") || literalFilePath.includes("\\") || literalFilePath.includes("..") || literalFilePath.includes("%2F") || literalFilePath.includes("%5C")) {
-    return res.status(403).send("no! th-thats dirty... you can't do that..!").end()
+    return res.status(403).send("no! th-thats dirty... you can't do that..!").end();
   } else {
     uploadThisFuckingFile.mv(uploadPath, function (err) {
       if (err)
