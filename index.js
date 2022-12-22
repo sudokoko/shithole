@@ -29,8 +29,8 @@ app.post('/api/v1/upload', function (req, res) {
     res.status(403).send("no! th-thats dirty... you can't do that..!").end();
   } else {
     if (isNsfw === "true") {
-      uploadPath = '/var/www/html' + literalFilePath.prepend("NSFW_");
-      literalFilePath = literalFilePath.prepend("NSFW_");
+      uploadPath = '/var/www/html/NSFW_' + literalFilePath;
+      literalFilePath = "NSFW_" + literalFilePath;
     }
     uploadThisFuckingFile.mv(uploadPath, function (err) {
       if (err)
