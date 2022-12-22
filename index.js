@@ -26,22 +26,26 @@ app.post('/api/v1/upload', function (req, res) {
   } else if (uploadPath.includes("index")) {
     return res.status(403).send("您好 " + ip + "，您似乎正在尝试上传 index.html 文件。 不要那样做你这只傻鹅！").end();
   } else if (literalFilePath.includes("/") || literalFilePath.includes("\\") || literalFilePath.includes("..") || literalFilePath.includes("%2F") || literalFilePath.includes("%5C")) {
-    res.status(403).send("no! th-thats dirty... you can't do that..!").end()
+    res.status(403).send("no! th-thats dirty... you can't do that..!").end();
   } else {
+    if (isNsfw === "true") {
+      uploadPath = '/var/www/html' + uploadThisFuckingFile.name.prepend("NSFW_");
+      literalFilePath = uploadThisFuckingFile.name.prepend("NSFW_");
+    }
     uploadThisFuckingFile.mv(uploadPath, function (err) {
       if (err)
         return res.status(500).send(err);
-      if (isNsfw === "true") {
-        fs.appendFileSync('/var/www/html/.htaccess', 'AddDescription "This file contains content flagged as NSFW." ' + literalFilePath + '\n')
-      }
       fs.appendFileSync('/var/www/html/configuration/upload.log', '[' + ip + ' -> POST /api/v1/upload] ' + literalFilePath + '\n'); // logging. because people are dumb.
       res.status(200).send("File was uploaded successfully, it should now appear on the dump.").end();
     });
   }
 });
 
+/* serve the nsfw uploader */
+app.use('/nsfw-upload', express.static('nsfw_static'));
+
 /* serve the uploader */
-app.use('*', express.static('static'));
+app.use('/', express.static('static'));
 
 
 app.listen(port, () => {
