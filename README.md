@@ -1,5 +1,6 @@
-# temporarily archived
-i'm going to step back from shithole development for a while. shithole.ml has been shut down, however an archive has been created. this should still work if you figure out how to get it working.
+# temporarily stepping back
+i'm going to step back from shithole development for a while. shithole.ml has been shut down, however an archive has been created. this should still work if you figure out how to get it working. feel free to open a PR if you want to add something and i'll review it.
+<br><br>
 
 <div style="text-align: center;">
   <img src="https://shithole.ml/logos.png" width="35%" height="auto">
