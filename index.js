@@ -11,10 +11,12 @@ app.post('/api/v1/upload', function (req, res) {
   let uploadThisFuckingFile;
   let uploadPath;
   let literalFilePath;
+  let isNsfw;
 
   uploadThisFuckingFile = req.files.uploadThisFuckingFile;
   uploadPath = '/var/www/html/' + uploadThisFuckingFile.name;
   literalFilePath = uploadThisFuckingFile.name;
+  isNsfw = req.query.nsfw;
 
   const banList = fs.readFileSync("/var/www/html/configuration/bans.txt");
   var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
