@@ -11,12 +11,10 @@ app.post('/api/v1/upload', function (req, res) {
   let uploadThisFuckingFile;
   let uploadPath;
   let literalFilePath;
-  let isNsfw;
 
   uploadThisFuckingFile = req.files.uploadThisFuckingFile;
   uploadPath = '/var/www/html/' + uploadThisFuckingFile.name;
   literalFilePath = uploadThisFuckingFile.name;
-  isNsfw = req.query.nsfw;
 
   const banList = fs.readFileSync("/var/www/html/configuration/bans.txt");
   var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
@@ -28,10 +26,6 @@ app.post('/api/v1/upload', function (req, res) {
   } else if (literalFilePath.includes("/") || literalFilePath.includes("\\") || literalFilePath.includes("..") || literalFilePath.includes("%2F") || literalFilePath.includes("%5C")) {
     res.status(403).send("no! th-thats dirty... you can't do that..!").end();
   } else {
-    if (isNsfw === "true") {
-      uploadPath = '/var/www/html/NSFW_' + literalFilePath;
-      literalFilePath = "NSFW_" + literalFilePath;
-    }
     uploadThisFuckingFile.mv(uploadPath, function (err) {
       if (err)
         return res.status(500).send(err);
