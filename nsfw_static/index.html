@@ -1,25 +1,27 @@
 <html>
-  <head>
-    <style>
-      .center-screen {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <form ref='uploadForm' 
-      id='uploadForm' 
-      action='/api/v1/upload?nsfw=true' 
-      method='POST' 
-      encType="multipart/form-data">
-      <div class='center-screen'>
-        <input type="file" name="uploadThisFuckingFile" />
-        <input type='submit' value='Upload **NSFW** File' />
-      </div>
-    </form>     
-  </body>
+
+<head>
+  <style>
+    .center-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <p
+    style="padding: 5px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif">
+    Click the button below to upload an <i style="color: red;">NSFW</i> file.</p>
+  <form ref='uploadForm' id='uploadForm' action='/api/v1/upload?nsfw=true' method='POST' encType="multipart/form-data">
+    <div class='center-screen'>
+      <input type="file" name="uploadThisFuckingFile" />
+      <input type='submit' value='Upload **NSFW** File' />
+    </div>
+  </form>
+</body>
+
 </html>
