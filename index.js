@@ -11,18 +11,16 @@ app.post('/api/v1/upload', function (req, res) {
   let uploadThisFuckingFile;
   let uploadPath;
   let literalFilePath;
-  let isNsfw;
 
   uploadThisFuckingFile = req.files.uploadThisFuckingFile;
   uploadPath = '/var/www/html/' + uploadThisFuckingFile.name;
   literalFilePath = uploadThisFuckingFile.name;
-  isNsfw = req.query.nsfw;
 
   const banList = fs.readFileSync("/var/www/html/configuration/bans.txt");
   var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
 
   if (banList.includes(ip)) {
-    res.status(403).send("You are permanently banned from uploading content to this shithole instance because you have previously uploaded illegal, malicious, or copyrighted content.").end();
+    return res.status(403).send("You are permanently banned from uploading content to this shithole instance because you have previously uploaded illegal, malicious, or copyrighted content.").end();
   } else if (uploadPath.includes("index")) {
     return res.status(403).send("您好 " + ip + "，您似乎正在尝试上传 index.html 文件。 不要那样做你这只傻鹅！").end();
   } else if (literalFilePath.includes("/") || literalFilePath.includes("\\") || literalFilePath.includes("..") || literalFilePath.includes("%2F") || literalFilePath.includes("%5C")) {
