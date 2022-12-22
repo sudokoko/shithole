@@ -2,7 +2,7 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
 const app = express();
-const port = 8000;
+const port = 8000; // this is temporary!
 
 /* create the upload endpoint */
 app.use(fileUpload());
@@ -11,10 +11,12 @@ app.post('/api/v1/upload', function (req, res) {
   let uploadThisFuckingFile;
   let uploadPath;
   let literalFilePath;
+  let isNsfw;
 
   uploadThisFuckingFile = req.files.uploadThisFuckingFile;
   uploadPath = '/var/www/html/' + uploadThisFuckingFile.name;
   literalFilePath = uploadThisFuckingFile.name;
+  isNsfw = req.query.nsfw;
 
   const banList = fs.readFileSync("/var/www/html/configuration/bans.txt");
   var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
@@ -24,8 +26,12 @@ app.post('/api/v1/upload', function (req, res) {
   } else if (uploadPath.includes("index")) {
     return res.status(403).send("您好 " + ip + "，您似乎正在尝试上传 index.html 文件。 不要那样做你这只傻鹅！").end();
   } else if (literalFilePath.includes("/") || literalFilePath.includes("\\") || literalFilePath.includes("..") || literalFilePath.includes("%2F") || literalFilePath.includes("%5C")) {
-    return res.status(403).send("no! th-thats dirty... you can't do that..!").end();
+    res.status(403).send("no! th-thats dirty... you can't do that..!").end();
   } else {
+    if (isNsfw === "true") {
+      uploadPath = '/var/www/html' + uploadThisFuckingFile.name.prepend("NSFW_");
+      literalFilePath = uploadThisFuckingFile.name.prepend("NSFW_");
+    }
     uploadThisFuckingFile.mv(uploadPath, function (err) {
       if (err)
         return res.status(500).send(err);
@@ -35,8 +41,11 @@ app.post('/api/v1/upload', function (req, res) {
   }
 });
 
+/* serve the nsfw uploader */
+app.use('/nsfw-upload', express.static('nsfw_static'));
+
 /* serve the uploader */
-app.use('*', express.static('static'));
+app.use('/', express.static('static'));
 
 
 app.listen(port, () => {
